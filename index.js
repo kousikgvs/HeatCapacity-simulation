@@ -35,7 +35,7 @@ $(document).ready(function () {
 	$("#materialofcalorimeter").on('change', function () {
 		materialofcalorimeter = $(this).val();
 		if (materialofcalorimeter == 'copper') {
-			sc = 0.366;
+			sc = 0.386;
 		}
 		else if (materialofcalorimeter == 'aluminium') {
 			sc = 0.900;
@@ -43,7 +43,7 @@ $(document).ready(function () {
 	});
 });
 
-var mc = "";
+var mc;
 // To display The Range Values 
 // Value Mass of calorimeter
 function valuemassofcalorimeter() {
@@ -53,7 +53,7 @@ function valuemassofcalorimeter() {
 	return x;
 }
 
-var mw = "";
+var mw;
 // Value Mass of Water
 function valuemassofwater() {
 	var x = document.getElementById("massofwater").value;
@@ -76,7 +76,7 @@ $(document).ready(function () {
 	});
 });
 
-var ms = "";
+var ms;
 // Value mass of solid 
 function valuemassofsolid() {
 	var x = document.getElementById("massofsolid").value;
@@ -86,7 +86,7 @@ function valuemassofsolid() {
 }
 
 var t1 = 25;
-var t2 = "";
+var t2;
 // Value temp of solid 
 function valuetempofsolid() {
 	var x = document.getElementById("tempofsolid").value;
@@ -115,7 +115,7 @@ $(document).ready(function () {
 	$("#materialofcalorimeter_l").on('change', function () {
 		materialofcalorimeter_l = $(this).val();
 		if (materialofcalorimeter_l == 'copper') {
-			sc_l = 0.366;
+			sc_l = 0.386;
 		}
 		else if (materialofcalorimeter_l == 'aluminium') {
 			sc_l = 0.900;
@@ -156,12 +156,26 @@ var materialofsolid_l = "";
 var ss_l;
 $(document).ready(function () {
 	$("#materialofsolid_l").on('change', function () {
-		materialofcalorimeter_l = $(this).val();
-		if (materialofcalorimeter_l == 'A') {
+		materialofsolid_l = $(this).val();
+		if (materialofsolid_l == 'A') {
 			ss_l = 0.375;
 		}
-		else if (materialofcalorimeter_l == 'B') {
+		else if (materialofsolid_l == 'B') {
 			ss_l = 0.460;
+		}
+	});
+});
+
+var materialofliquid = "";
+var sl_l;
+$(document).ready(function () {
+	$("#materialofliquid_l").on('change', function () {
+		materialofliquid = $(this).val();
+		if (materialofliquid == 'A') {
+			sl_l = 1.72;
+		}
+		else if (materialofliquid == 'B') {
+			sl_l = 1.67;
 		}
 	});
 });
@@ -333,7 +347,13 @@ function clickbunsenburner() {
 		$("#solid").css({
 			"margin-top": "-200px"
 		});
-		alert(`The Solid has Been Heated up to ${t2}`);
+		if (methodselector == "solid") {
+			alert(`The Solid has Been Heated up to ${t2}`);
+		}
+		else if (methodselector == "liquid") {
+			alert(`The Solid has Been Heated up to ${t2_l}`);
+		}
+
 	}, 4000);
 }
 
@@ -420,10 +440,10 @@ function dropintoinsulationbox(ev) {
 
 			setTimeout(function () {
 				$("#calorimeter").css({
-					"display":"none"
+					"display": "none"
 				});
 				$("#hiddencalorimeter").css({
-					"display":"block"
+					"display": "block"
 				});
 			}, 5000);
 
@@ -432,6 +452,7 @@ function dropintoinsulationbox(ev) {
 			}, 9000);
 
 		}
+		displayresult == true
 	});
 }
 
@@ -470,20 +491,50 @@ function dropbeakeronbunsen(ev) {
 	});
 }
 
-function result()
-{
-	if(methodselector=="solid")
-	{
-		var t3 = ((ss * (ms/1000) * (t2+273.15) + sw * (mw/1000) * (t1+273.15) + sc * (mc/1000) * (t1+273.15))/((mw/1000) * sw + (mc/1000) * sc + (ms/1000) * ss))/100;
-		ss = ((((mc/1000) + (mw/1000) - (mc/1000))*sw*(t3-t1)) + (t3-t1)) / (ms * (t2-t3));
+function result() {
+
+	if (methodselector == "solid") {
+		mc = Number(mc);
+		ms = Number(ms);
+		mw = Number(mw);
+		ss = Number(ss);
+		sc = Number(sc);
+		sw = Number(sw);
+		t1 = Number(t1);
+		t2 = Number(t2);
+
+		var Numerator = (ss * ms * t2) + (sw * mw * t1) + (sc * mc * t1);
+		var denominator = (mw * sw) + (mc * sc) + (ms * ss);
+		var t3 = Numerator / denominator;
 		document.getElementById("valuefinaltemp").innerHTML = t3;
+
+		var Numerator1 = (mw) * (sw) * (t3 - t1) + (mc * sc * (t3 - t1))
+		var denominator1 = (ms * (t2 - t3))
+		ss = Numerator1 / denominator1;
+
 		document.getElementById("valuehc-solid").innerHTML = ss;
 	}
-	else if(methodselector=="liquid")
-	{
-		// var t3_1 = (mc_l * sc_1 * t1_l + ml_l * sl_l * t1_l + ms_l * ss_l * t2_l)/(mc_l*sc_l + ml_l*sl_l + ms_l*ss_l);
-		var t3_l = "86.98654"
+	else if (methodselector == "liquid") {
+		mc_l = Number(mc_l);
+		ms_l = Number(ms_l);
+		ml_l = Number(ml_l);
+		ss_l = Number(ss_l);
+		sc_l = Number(sc_l);
+		sl_l = Number(sl_l);
+		t1_l = Number(t1_l);
+		t2_l = Number(t2_l);
+
+		var Numerator2 = (mc_l * sc_l * t1_l) + (ml_l * sl_l * t1_l) + (ms_l * ss_l * t2_l);
+		var denominator2 = (mc_l * sc_l) + (ml_l * sl_l) + (ms_l * ss_l);
+		var t3_l = Numerator2 / denominator2;
+
 		document.getElementById("valuefinaltempl").innerHTML = t3_l;
-		document.getElementById("valuehc-liquid_l").innerHTML = "1.67897";
+
+		var Numerator3 = (ms_l * ss_l * (t2_l - t3_l)) - (mc_l * sc_l * (t3_l - t1_l));
+		var denominator3 = (ml_l * (t3_l - t1_l));
+		sl_l = Numerator3 / denominator3;
+
+		document.getElementById("valuehc-liquidl").innerHTML = sl_l;
 	}
 }
+
