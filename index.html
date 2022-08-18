@@ -97,15 +97,15 @@
 
         <p style="position: absolute;bottom:-215px;" onclick="FetchDatasolid()"><u>Fetch data :</u></p>
         <div style="position:absolute;bottom:-425px;">
-            <p>Specific Heat capacity of Calorimeter: <span id="valuehc-calorimeter"></span> KJK/gK</p>
-            <p>Mass of solid : <span id="valuemass-solid"></span> KJK/gK</p>
-            <p>Temparature Upto which solid is heated : <span id="valuetemp-solid"></span> KJK/gK</p>
-            <p>Specific Heat capacity of the water : <span id="valuehc-water"></span> KJK/gK</p>
+            <p>Specific Heat capacity of Calorimeter: <span id="valuehc-calorimeter"></span> KJ kg<sup>-1</sup>K <sup>-1</sup></p>
+            <p>Mass of solid : <span id="valuemass-solid"></span> KJ kg<sup>-1</sup>K <sup>-1</sup></p>
+            <p>Temparature Upto which solid is heated : <span id="valuetemp-solid"></span>K</p>
+            <p>Specific Heat capacity of the water : <span id="valuehc-water"></span> KJ kg<sup>-1</sup>K <sup>-1</sup></p>
         </div>
         <p  style="position: absolute;bottom:-455px;"><u onclick="result()">Result :</u></p>
         <div style="position: absolute;top: 865px;display: block;">
-            <p>Final Temp of Mixture : <span id="valuefinaltemp"></span></p>
-            <p>Specific Heat capacity of Solid: <span id="valuehc-solid"></span> KJK/gK</p>
+            <p>Final Temp of Mixture : <span id="valuefinaltemp"></span>K</p>
+            <p>Specific Heat capacity of Solid: <span id="valuehc-solid"></span>  KJ kg<sup>-1</sup>K <sup>-1</sup></p>
         </div>
     </div>
     <!-- ------------------------------------------------------------------------------------------------------ -->
@@ -152,7 +152,7 @@
         </select>
 
         <label for="materialofliquid">Material of liquid : </label>
-        <select name="materialselector" id="materialofliquid" style="display: block;">
+        <select name="materialselector" id="materialofliquid_l" style="display: block;">
             <option id="" value="">select material of liquid</option>
             <option id="" value="A">A</option>
             <option id="" value="B">B</option>
@@ -174,15 +174,15 @@
 
         <p style="position: absolute;bottom:-295px;" onclick="FetchDataliquid()"><u>Fetch data :</u></p>
         <div style="position:absolute;bottom:-505px;">
-            <p>Specific Heat capacity of Calorimeter: <span id="valuehc-calorimeter_l"></span> KJK/gK</p>
-            <p>Mass of solid : <span id="valuemass-solid_l"></span> KJK/gK</p>
-            <p>Temparature Upto which solid is heated : <span id="valuetemp-solid_l"></span> KJK/gK</p>
-            <p>Specific Heat capacity of Solid: <span id="valuehc-solid_l"></span> KJK/gK</p>
+            <p>Specific Heat capacity of Calorimeter: <span id="valuehc-calorimeter_l"></span>KJ kg<sup>-1</sup>K <sup>-1</sup></p>
+            <p>Mass of solid : <span id="valuemass-solid_l"></span> kg</p>
+            <p>Temparature Upto which solid is heated : <span id="valuetemp-solid_l"></span> K</p>
+            <p>Specific Heat capacity of Solid: <span id="valuehc-solid_l"></span> KJ kg<sup>-1</sup>K <sup>-1</sup></p>
         </div>
         <p onclick="result()" style="position: absolute;bottom:-555px;"><u>Result :</u></p>
         <div style="position: absolute;top: 965px;display: block;">
-            <p>Final Temp of Mixture : <span id="valuefinaltempl"></span></p>
-            <p>Specific Heat capacity of the liquid : <span id="valuehc-liquidl"></span> KJK/gK</p>
+            <p>Final Temp of Mixture : <span id="valuefinaltempl"></span>K</p>
+            <p>Specific Heat capacity of the liquid : <span id="valuehc-liquidl"></span>KJ kg<sup>-1</sup>K <sup>-1</sup></p>
         </div>
     </div>
     <!------------------------------------------------------------------------------------------------------>
